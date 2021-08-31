@@ -19,7 +19,7 @@
     <script type="text/babel">
         function MyComponent() {
             console.log(this); //此处的this是undefined，因为babel编译后开启了严格模式
-            return <h1>函数式组件</h1>
+            return <h1>函数式组件(适用于简单组件)</h1>
         }
         ReactDOM.render(<MyComponent />, document.getElementById('test'))
         /**

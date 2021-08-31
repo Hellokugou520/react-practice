@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 定义一个类组件
+        class Money extends React.Component {
+            constructor(props) {
+                super(props)
+                // 初始化状态
+                this.state = { havaMoney: false }
+            }
+            render() {
+                console.log(this)
+                // 读取状态
+                const { havaMoney } = this.state
+                return <h2 onClick={this.change}>一个{havaMoney ? '有钱' : '没钱'}的人</h2>
+            }
+            change() {
+                //change放在哪里？ ———— Money的原型对象上，供实例使用
+                //由于change是作为onClick的回调，所以不是通过实例调用的，是直接调用
+                //类中的方法默认开启了局部的严格模式，所以change中的this为undefined
+                console.log(this) // undefined
+            }
+        }
+
+        ReactDOM.render(<Money />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
