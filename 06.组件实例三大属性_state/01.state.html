@@ -23,6 +23,7 @@
                 super(props)
                 // 初始化状态
                 this.state = { havaMoney: false }
+                this.change = this.change.bind(this)
             }
             render() {
                 console.log(this)
@@ -34,7 +35,12 @@
                 //change放在哪里？ ———— Money的原型对象上，供实例使用
                 //由于change是作为onClick的回调，所以不是通过实例调用的，是直接调用
                 //类中的方法默认开启了局部的严格模式，所以change中的this为undefined
-                console.log(this) // undefined
+                // console.log(this) // 没有改变指向前，值为undefined
+
+                // react中的状态(state)不可以直接更改，需要通过react内置API setState
+                // this.state.havaMoney = !this.state.havaMoney
+                // setState做的是合并操作，而不是替换操作
+                this.setState({ havaMoney: !this.state.havaMoney })
             }
         }
 
