@@ -56,6 +56,18 @@
         const f1 = new Fool('阿斗', 16, '才高八斗')
         console.log(f1)
         f1.speak()
+
+        // Dog类
+        class Dog {
+            constructor(name) {
+                this.name = name
+            }
+            // 类中可以直接写赋值语句,如下代码的含义是：给Dog的实例对象添加一个属性，名为leg，值为4
+            leg = 4
+        }
+
+        const d1 = new Dog('哈蒙德')
+        console.log(d1)
     </script>
 </body>
 
