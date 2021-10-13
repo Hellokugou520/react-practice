@@ -17,24 +17,41 @@
     <script type="text/javascript" src="../js/react.development.js"></script>
     <script type="text/javascript" src="../js/react-dom.development.js"></script>
     <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 引入prop-types，用于对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
 
     <script type="text/babel">
         class Person extends React.Component {
             render() {
-                console.log(this)
                 const { name, platform, size } = this.props
                 return (
                     <ul>
                         <li>游戏名：{name}</li>
                         <li>平台：{platform}</li>
-                        <li>大小：{size + 1}G</li>
+                        <li>大小：{size}</li>
                     </ul>
                 )
             }
         }
 
-        ReactDOM.render(<Person name="GTA" platform="PC" size={80} />, document.getElementById('test1'))
-        ReactDOM.render(<Person name="OW" platform="PC" size={50} />, document.getElementById('test2'))
+        function play() {
+            console.log('Start!')
+        }
+
+        // 对标签属性进行类型、必要性限制
+        Person.propTypes = {
+            name: PropTypes.string.isRequired,
+            size: PropTypes.number,
+            play: PropTypes.func // 限制为方法
+        }
+        // 指定默认标签属性值
+        Person.defaultProps = {
+            platform: '未知平台',
+            size: 0
+        }
+
+        ReactDOM.render(<Person name="GTA" platform="PC" play={play} />, document.getElementById('test1'))
+        ReactDOM.render(<Person name="OW" size={50} />, document.getElementById('test2'))
         const Obj = { name: 'AC', platform: 'PC', size: 40 }
         ReactDOM.render(<Person {...Obj} />, document.getElementById('test3'))
     </script>
