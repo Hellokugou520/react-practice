@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扩展运算符</title>
+</head>
+
+<body>
+    <script>
+        let arr1 = [1, 3, 5, 7, 9]
+        let arr2 = [2, 4, 6, 8, 10]
+        console.log(...arr1)
+        console.log([...arr1, ...arr2])
+
+        // 在函数中使用
+        function sum(...numbers) {
+            return numbers.reduce((preValue, currentValue) => {
+                return preValue + currentValue
+            })
+        }
+        console.log('和为', sum(1, 2, 3, 4))
+
+        // 构造字面量对象时使用展开语法
+        let Game = { name: "GTA", platform: "PC", size: "80" }
+        // console.log(...Game) // 报错，不能直接在对象上使用扩展运算符
+        console.log({ ...Game }) // 正确用法
+        let Copy = { ...Game }
+        Game.name = 'OW'
+        let Other = { ...Game, name: "AC" }
+        console.log(Game, Copy, Other)
+    </script>
+</body>
+
+</html>
