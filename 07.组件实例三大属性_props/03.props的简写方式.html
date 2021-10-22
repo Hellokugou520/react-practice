@@ -10,9 +10,7 @@
 
 <body>
     <!-- 准备好一个“容器” -->
-    <div id="test1"></div>
-    <div id="test2"></div>
-    <div id="test3"></div>
+    <div id="test"></div>
 
     <script type="text/javascript" src="../js/react.development.js"></script>
     <script type="text/javascript" src="../js/react-dom.development.js"></script>
@@ -22,9 +20,29 @@
 
     <script type="text/babel">
         class Person extends React.Component {
+            constructor(props) {
+                // 构造器是否接收props，是否传递给super，取决于是否希望在构造器中通过this访问props
+                /**
+                 * React官方文档描述
+                 * 在 React 组件挂载之前，会调用它的构造函数。
+                 * 在为 React.Component 子类实现构造函数时，应在其他语句之前前调用 super(props)。
+                 * 否则，this.props 在构造函数中可能会出现未定义的 bug。
+                 */
+                super(props)
+                console.log('constructor', this.props)
+            }
+
+            static propTypes = {
+                name: PropTypes.string.isRequired,
+                size: PropTypes.number,
+                play: PropTypes.func // 限制为方法
+            }
+            static defaultProps = {
+                platform: '未知平台',
+                size: 0
+            }
             render() {
                 const { name, platform, size } = this.props
-                // this.props.name = 'FF' // 此行代码会报错，因为props是只读的
                 return (
                     <ul>
                         <li>游戏名：{name}</li>
@@ -35,26 +53,7 @@
             }
         }
 
-        function play() {
-            console.log('Start!')
-        }
-
-        // 对标签属性进行类型、必要性限制
-        Person.propTypes = {
-            name: PropTypes.string.isRequired,
-            size: PropTypes.number,
-            play: PropTypes.func // 限制为方法
-        }
-        // 指定默认标签属性值
-        Person.defaultProps = {
-            platform: '未知平台',
-            size: 0
-        }
-
-        ReactDOM.render(<Person name="GTA" platform="PC" play={play} />, document.getElementById('test1'))
-        ReactDOM.render(<Person name="OW" size={50} />, document.getElementById('test2'))
-        const Obj = { name: 'AC', platform: 'PC', size: 40 }
-        ReactDOM.render(<Person {...Obj} />, document.getElementById('test3'))
+        ReactDOM.render(<Person name="GTA" />, document.getElementById('test'))
     </script>
 </body>
 
