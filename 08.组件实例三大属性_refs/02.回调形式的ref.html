@@ -21,19 +21,20 @@
             render() {
                 return (
                     <div>
-                        <input ref="input1" type="text" />&nbsp;
+                        <input ref={(el) => { this.input1 = el }} type="text" />&nbsp;
                         <button onClick={this.alertInfo1}>点击显示左侧输入框文字</button>&nbsp;
-                        <input onBlur={this.alertInfo2} ref="input2" type="text" placeholder="失焦显示文字" />
+                        <input onBlur={this.alertInfo2} ref={(el) => { this.input2 = el }} type="text" placeholder="失焦显示文字" />
                     </div>
                 )
             }
             alertInfo1 = () => {
-                alert(this.refs.input1.value)
+                alert(this.input1.value)
             }
             alertInfo2 = () => {
-                alert(this.refs.input2.value)
+                alert(this.input2.value)
             }
         }
+
         ReactDOM.render(<Ref />, document.getElementById('test'))
     </script>
 </body>
