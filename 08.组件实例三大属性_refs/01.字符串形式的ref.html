@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // debugger
+        class Ref extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <input ref="input1" type="text" />&nbsp;
+                        <button onClick={this.alertInfo1}>点击显示左侧输入框文字</button>&nbsp;
+                        <input onBlur={this.alertInfo2} ref="input2" type="text" placeholder="失焦显示文字" />
+                    </div>
+                )
+            }
+            alertInfo1 = () => {
+                alert(this.refs.input1.value)
+            }
+            alertInfo2 = () => {
+                alert(this.refs.input2.value)
+            }
+        }
+
+        ReactDOM.render(<Ref />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
