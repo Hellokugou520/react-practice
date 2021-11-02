@@ -45,6 +45,11 @@
 
             state = { havaMoney: false }
 
+            saveInput = (el) => {
+                this.input = el
+                console.log('@', el)
+            }
+
             showFont = () => {
                 alert(this.input.value)
             }
