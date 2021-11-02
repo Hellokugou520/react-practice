@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Form extends React.Component {
+            render() {
+                return (
+                    <form onSubmit={this.submit}>
+                        用户名：<input ref={(el) => { this.user = el }} type="text" name="user" />
+                        密码：<input ref={(el) => { this.pwd = el }} type="password" name="password" />
+                        <button>登陆</button>
+                    </form>
+                )
+            }
+
+            submit = (e) => {
+                e.preventDefault() //阻止默认事件
+                const { user, pwd } = this
+                alert(`你输入的用户名是${user.value}，密码是${pwd.value}`)
+            }
+        }
+
+        ReactDOM.render(<Form />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
