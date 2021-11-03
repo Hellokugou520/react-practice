@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        /** 
+         * 高阶函数：如果一个函数符合下面2个规范中的任何一个，那该函数就是高阶函数。
+         *      1.若A函数，接收的参数是一个函数，那么A就可以称之为高阶函数。
+         *      2.若A函数，调用的返回值依然是一个函数，那么A就可以称之为高阶函数。
+         *      常见的高阶函数有：Promise、setTimeout、arr.map()等等
+         * 
+         * 函数的柯里化：通过函数调用继续返回函数的方式，实现多次接收参数最后统一处理的函数编码形式。 
+                function sum(a){
+                    return(b)=>{
+                        return (c)=>{
+                            return a+b+c
+                        }
+                    }
+                }
+         */
+
+        class Form extends React.Component {
+            render() {
+                return (
+                    <form onSubmit={this.submit}>
+                        用户名：<input onChange={this.saveFormData('user')} type="text" name="user" />
+                        密码：<input onChange={this.saveFormData('pwd')} type="password" name="password" />
+                        <button>登陆</button>
+                    </form>
+                )
+            }
+
+            // 初始化状态
+            state = { user: '', pwd: '' }
+
+            saveFormData = (dataType) => {
+                return (e) => {
+                    this.setState({ [dataType]: e.target.value })
+                }
+            }
+
+            submit = (e) => {
+                e.preventDefault() //阻止默认事件
+                const { user, pwd } = this.state
+                alert(`你输入的用户名是${user}，密码是${pwd}`)
+            }
+        }
+
+        ReactDOM.render(<Form />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
