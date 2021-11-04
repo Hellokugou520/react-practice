@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Life extends React.Component {
+            // 初始化渲染、状态更新之后
+            render() {
+                console.log('render')
+                return (
+                    <div>
+                        <h2 style={{ opacity: this.state.opacity }}>反复横跳</h2>
+                        <button onClick={this.death}>灭霸响指</button>
+                    </div>
+                )
+            }
+
+            state = { opacity: 1 }
+
+            // 组件挂载完毕
+            componentDidMount() {
+                console.log('componentDidMount')
+                this.timer = setInterval(() => {
+                    let { opacity } = this.state
+                    opacity -= 0.1
+                    if (opacity <= 0) opacity = 1
+                    this.setState({ opacity })
+                }, 200)
+            }
+
+            // 组件将要卸载
+            componentWillUnmount() {
+                console.log('componentWillUnmount')
+                clearInterval(this.timer)
+            }
+
+            death = () => {
+                // 卸载、销毁组件
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+        }
+
+        ReactDOM.render(<Life />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
