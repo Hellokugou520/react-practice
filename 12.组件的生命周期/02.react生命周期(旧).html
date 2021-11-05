@@ -73,7 +73,40 @@
             }
         }
 
-        ReactDOM.render(<Count />, document.getElementById('test'))
+        class A extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <div>A组件</div>
+                        <button onClick={this.changeCar}>给B一辆车</button>
+                        <B carName={this.state.carName} />
+                    </div>
+                )
+            }
+
+            state = { carName: '小鹏' }
+
+            changeCar = () => {
+                this.setState({ carName: '特斯拉' })
+            }
+        }
+
+        class B extends React.Component {
+            // 组件将要接收新的props(首次挂载接收不计入该钩子，后续更新传入才会执行)
+            componentWillReceiveProps(props) {
+                console.log('B---componentWillReceiveProps', props)
+            }
+
+            render() {
+                return (
+                    <div>
+                        <div>B组件：{this.props.carName}</div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<A />, document.getElementById('test'))
     </script>
 </body>
 
