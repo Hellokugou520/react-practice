@@ -53,6 +53,7 @@
                         <h2>点击次数：{count}</h2>
                         <button onClick={this.add}>增加</button>
                         <button onClick={this.death}>卸载</button>
+                        <button onClick={this.force}>强制更新</button>
                     </div >
                 )
             }
@@ -64,6 +65,11 @@
 
             death = () => {
                 ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+
+            // 不更改状态，强制更新(跳过shouldComponentUpdate)
+            force = () => {
+                this.forceUpdate()
             }
         }
 
