@@ -28,10 +28,21 @@
                 this.state = { count: 0 }
             }
 
-            // 加入UNSAFE_将不会出现警告，但是在未来的版本中或将废弃，不建议使用
-            UNSAFE_componentWillMount() {
-                console.log('count---componentWillMount')
+            /** 
+             * 官方文档说明
+             * getDerivedStateFromProps 会在调用 render 方法之前调用，并且在初始挂载及后续更新时都会被调用。
+             * 它应返回一个对象来更新 state，如果返回 null 则不更新任何内容。
+             * 派生状态会导致代码冗余，并使组件难以维护
+             * 平时使用场景不多
+             */
+            static getDerivedStateFromProps(props, state) {
+                console.log('count---getDerivedStateFromProps', props, state)
+                return props
             }
+            // 加入UNSAFE_将不会出现警告，但是在未来的版本中或将废弃，不建议使用
+            // UNSAFE_componentWillMount() {
+            //     console.log('count---componentWillMount')
+            // }
             componentDidMount() {
                 console.log('count---componentDidMount')
             }
@@ -40,9 +51,9 @@
                 return true
             }
             // 加入UNSAFE_将不会出现警告，但是在未来的版本中或将废弃，不建议使用
-            UNSAFE_componentWillUpdate() {
-                console.log('count---componentWillUpdate')
-            }
+            // UNSAFE_componentWillUpdate() {
+            //     console.log('count---componentWillUpdate')
+            // }
             componentDidUpdate() {
                 console.log('count---componentDidUpdate')
             }
@@ -111,7 +122,7 @@
             }
         }
 
-        ReactDOM.render(<A />, document.getElementById('test'))
+        ReactDOM.render(<Count count={100} />, document.getElementById('test'))
     </script>
 </body>
 
