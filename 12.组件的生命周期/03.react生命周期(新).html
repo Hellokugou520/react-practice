@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+    <script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+
+    <script type="text/babel">
+        /** 
+         * 新版本生命周期废弃三个钩子，新增两个钩子
+         */
+
+        class Count extends React.Component {
+            constructor(props) {
+                console.log('count---constructor')
+                super(props)
+                this.state = { count: 0 }
+            }
+
+            // 加入UNSAFE_将不会出现警告，但是在未来的版本中或将废弃，不建议使用
+            UNSAFE_componentWillMount() {
+                console.log('count---componentWillMount')
+            }
+            componentDidMount() {
+                console.log('count---componentDidMount')
+            }
+            shouldComponentUpdate() {
+                console.log('count---shouldComponentUpdate')
+                return true
+            }
+            // 加入UNSAFE_将不会出现警告，但是在未来的版本中或将废弃，不建议使用
+            UNSAFE_componentWillUpdate() {
+                console.log('count---componentWillUpdate')
+            }
+            componentDidUpdate() {
+                console.log('count---componentDidUpdate')
+            }
+            componentWillUnmount() {
+                console.log('count---componentWillUnmount')
+            }
+
+            render() {
+                console.log('count---render')
+                const { count } = this.state
+                return (
+                    < div >
+                        <h2>点击次数：{count}</h2>
+                        <button onClick={this.add}>增加</button>
+                        <button onClick={this.death}>卸载</button>
+                        <button onClick={this.force}>强制更新</button>
+                    </div >
+                )
+            }
+
+            add = () => {
+                const { count } = this.state
+                this.setState({ count: count + 1 })
+            }
+
+            death = () => {
+                ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+            }
+
+            // 不更改状态，强制更新(跳过shouldComponentUpdate)
+            force = () => {
+                this.forceUpdate()
+            }
+        }
+
+        class A extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <div>A组件</div>
+                        <button onClick={this.changeCar}>给B一辆车</button>
+                        <B carName={this.state.carName} />
+                    </div>
+                )
+            }
+
+            state = { carName: '小鹏' }
+
+            changeCar = () => {
+                this.setState({ carName: '特斯拉' })
+            }
+        }
+
+        class B extends React.Component {
+            // 加入UNSAFE_将不会出现警告，但是在未来的版本中或将废弃，不建议使用
+            UNSAFE_componentWillReceiveProps(props) {
+                console.log('B---componentWillReceiveProps', props)
+            }
+
+            render() {
+                return (
+                    <div>
+                        <div>B组件：{this.props.carName}</div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<A />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
