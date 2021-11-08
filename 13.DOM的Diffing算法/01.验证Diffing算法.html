@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>react</title>
+</head>
+
+<body>
+    <!-- 准备好一个“容器” -->
+    <div id="test"></div>
+
+    <script type="text/javascript" src="../js/17.0.1/react.development.js"></script>
+    <script type="text/javascript" src="../js/17.0.1/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/17.0.1/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Diff extends React.Component {
+            render() {
+                // 虽然时间每隔1s就更新一次，但是两个输入框中输入的内容还存在，说明其他的节点并没有被更新，这就是Diffing算法在发挥作用
+                return (
+                    <div>
+                        <h1>hello</h1>
+                        <input type="text" />
+                        <div>现在的时间是：{this.state.time.toTimeString()}
+                            <input type="text" />
+                        </div>
+                    </div>
+                )
+            }
+
+            state = { time: new Date() }
+
+            componentDidMount() {
+                setInterval(() => {
+                    this.setState({ time: new Date() })
+                }, 1000)
+            }
+        }
+
+        ReactDOM.render(<Diff />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
