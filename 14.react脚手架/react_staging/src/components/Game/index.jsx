@@ -1,8 +1,8 @@
 import { Component } from "react";
-import "./index.css";
+import game from "./index.module.css";
 
 export default class Game extends Component {
   render() {
-    return <div className="Game">Game</div>;
+    return <div className={game.title}>Game</div>;
   }
 }
