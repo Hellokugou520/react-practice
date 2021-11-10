@@ -18,11 +18,21 @@ export default class App extends Component {
     return (
       <div className="todo-container">
         <div className="todo-wrap">
-          <Header />
+          <Header addTodo={this.addTodo} />
           <List todoList={todoList} />
           <Footer />
         </div>
       </div>
     );
   }
+
+  addTodo = (data) => {
+    const { todoList } = this.state;
+    this.setState({
+      todoList: [
+        { id: String(todoList.length + 1), name: data, done: false },
+        ...todoList,
+      ],
+    });
+  };
 }
