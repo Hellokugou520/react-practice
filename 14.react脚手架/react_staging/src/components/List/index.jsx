@@ -4,11 +4,11 @@ import "./index.css";
 
 export default class List extends Component {
   render() {
-    const { todoList } = this.props;
+    const { todoList, updateTodo } = this.props;
     return (
       <ul className="todo-main">
         {todoList.map((item) => {
-          return <Item key={item.id} {...item} />;
+          return <Item key={item.id} {...item} updateTodo={updateTodo} />;
         })}
       </ul>
     );

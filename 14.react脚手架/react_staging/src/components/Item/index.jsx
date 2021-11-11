@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import "./index.css";
 
 export default class Item extends Component {
+  // 鼠标是否移入某个todo项
   state = { flag: false };
 
   render() {
     const { flag } = this.state;
-    const { name, done } = this.props;
+    const { id, name, done } = this.props;
     return (
       <li
         onMouseEnter={() => {
@@ -18,7 +19,13 @@ export default class Item extends Component {
         style={{ backgroundColor: flag ? "#ccc" : "#fff" }}
       >
         <label>
-          <input type="checkbox" defaultChecked={done} />
+          <input
+            type="checkbox"
+            defaultChecked={done}
+            onChange={(e) => {
+              this.updateTodo(id, e);
+            }}
+          />
           <span>{name}</span>
         </label>
         <button
@@ -37,5 +44,9 @@ export default class Item extends Component {
 
   leave = (flag) => {
     this.setState({ flag: !this.state.flag });
+  };
+  // 调用上层组件传递进来的更新方法
+  updateTodo = (id, e) => {
+    this.props.updateTodo(id, e.target.checked);
   };
 }

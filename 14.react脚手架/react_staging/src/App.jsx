@@ -19,7 +19,7 @@ export default class App extends Component {
       <div className="todo-container">
         <div className="todo-wrap">
           <Header addTodo={this.addTodo} />
-          <List todoList={todoList} />
+          <List todoList={todoList} updateTodo={this.updateTodo} />
           <Footer />
         </div>
       </div>
@@ -34,5 +34,19 @@ export default class App extends Component {
         ...todoList,
       ],
     });
+  };
+
+  // 更新todoList里的数据状态
+  updateTodo = (id, done) => {
+    const { todoList } = this.state;
+    const newTodoList = todoList.map((item) => {
+      if (item.id === id) {
+        // 相同键名会覆盖
+        return { ...item, done: done };
+      } else {
+        return item;
+      }
+    });
+    this.setState({ todoList: newTodoList });
   };
 }
