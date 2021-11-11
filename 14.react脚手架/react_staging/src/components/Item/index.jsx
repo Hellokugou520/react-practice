@@ -31,6 +31,9 @@ export default class Item extends Component {
         <button
           className="btn btn-danger"
           style={{ display: flag ? "block" : "none" }}
+          onClick={() => {
+            this.deleteTodo(id);
+          }}
         >
           删除
         </button>
@@ -39,14 +42,17 @@ export default class Item extends Component {
   }
 
   enter = (flag) => {
-    this.setState({ flag: !this.state.flag });
+    this.setState({ flag: flag });
   };
 
   leave = (flag) => {
-    this.setState({ flag: !this.state.flag });
+    this.setState({ flag: flag });
   };
   // 调用上层组件传递进来的更新方法
   updateTodo = (id, e) => {
     this.props.updateTodo(id, e.target.checked);
+  };
+  deleteTodo = (id) => {
+    this.props.deleteTodo(id);
   };
 }
