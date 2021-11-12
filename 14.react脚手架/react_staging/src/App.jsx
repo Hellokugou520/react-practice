@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { nanoid } from "nanoid";
 import Header from "./components/Header";
 import List from "./components/List";
 import Footer from "./components/Footer";
@@ -24,7 +25,11 @@ export default class App extends Component {
             updateTodo={this.updateTodo}
             deleteTodo={this.deleteTodo}
           />
-          <Footer />
+          <Footer
+            todoList={todoList}
+            checkAll={this.checkAll}
+            clearTodo={this.clearTodo}
+          />
         </div>
       </div>
     );
@@ -33,10 +38,7 @@ export default class App extends Component {
   addTodo = (data) => {
     const { todoList } = this.state;
     this.setState({
-      todoList: [
-        { id: String(todoList.length + 1), name: data, done: false },
-        ...todoList,
-      ],
+      todoList: [{ id: nanoid(), name: data, done: false }, ...todoList],
     });
   };
 
@@ -59,6 +61,24 @@ export default class App extends Component {
     const { todoList } = this.state;
     const newTodoList = todoList.filter((item) => {
       return item.id !== id;
+    });
+    this.setState({ todoList: newTodoList });
+  };
+
+  // 全选
+  checkAll = (done) => {
+    const { todoList } = this.state;
+    const newTodoList = todoList.map((item) => {
+      return { ...item, done };
+    });
+    this.setState({ todoList: newTodoList });
+  };
+
+  // 清除已完成事项
+  clearTodo = () => {
+    const { todoList } = this.state;
+    const newTodoList = todoList.filter((item) => {
+      return item.done === false;
     });
     this.setState({ todoList: newTodoList });
   };

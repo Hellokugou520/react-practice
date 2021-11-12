@@ -21,7 +21,7 @@ export default class Item extends Component {
         <label>
           <input
             type="checkbox"
-            defaultChecked={done}
+            checked={done}
             onChange={(e) => {
               this.updateTodo(id, e);
             }}
@@ -53,6 +53,8 @@ export default class Item extends Component {
     this.props.updateTodo(id, e.target.checked);
   };
   deleteTodo = (id) => {
-    this.props.deleteTodo(id);
+    if (window.confirm("确定删除吗？")) {
+      this.props.deleteTodo(id);
+    }
   };
 }
