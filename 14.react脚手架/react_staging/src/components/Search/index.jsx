@@ -2,6 +2,25 @@ import React, { Component } from "react";
 import axios from "axios";
 
 export default class Search extends Component {
+  search = () => {
+    // 此处的写法是连续解构赋值+重命名
+    const {
+      keywordEle: { value: keyword },
+    } = this;
+    if (keyword) {
+      // 做了代理，通过代理转发请求，http://localhost:3000可以省略不写
+      axios.get(`/api/search/users?q=${keyword}`).then(
+        (res) => {
+          console.log("成功", res.data);
+          this.props.searchUsers(res.data.items);
+        },
+        (err) => {
+          console.log("失败", err);
+        }
+      );
+    }
+  };
+
   render() {
     return (
       <section className="jumbotron">
@@ -17,22 +36,4 @@ export default class Search extends Component {
       </section>
     );
   }
-
-  search = () => {
-    // 此处的写法是连续解构赋值+重命名
-    const {
-      keywordEle: { value: keyword },
-    } = this;
-    if (keyword) {
-      // 做了代理，通过代理转发请求，http://localhost:3000可以省略不写
-      axios.get(`/api/search/users?q=${keyword}`).then(
-        (res) => {
-          console.log("成功", res.data);
-        },
-        (err) => {
-          console.log("失败", err);
-        }
-      );
-    }
-  };
 }
