@@ -7,17 +7,24 @@ export default class Search extends Component {
     const {
       keywordEle: { value: keyword },
     } = this;
+    this.props.updateState({ isFirst: false, isLoading: true, err: "" });
     if (keyword) {
       // 做了代理，通过代理转发请求，http://localhost:3000可以省略不写
       axios.get(`/api/search/users?q=${keyword}`).then(
         (res) => {
           console.log("成功", res.data);
-          this.props.searchUsers(res.data.items);
+          this.props.updateState({
+            userList: res.data.items,
+            isLoading: false,
+          });
         },
         (err) => {
           console.log("失败", err);
+          this.props.updateState({ isLoading: false, err: err.message });
         }
       );
+    } else {
+      this.props.updateState({ userList: [], isFirst: true });
     }
   };
 
