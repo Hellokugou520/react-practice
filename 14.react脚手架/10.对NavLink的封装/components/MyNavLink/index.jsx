@@ -6,7 +6,7 @@ export default class MyNavLink extends Component {
     console.log(this.props);
     return (
       <NavLink
-        activeClassName="nav"
+        activeClassName="main-nav"
         className="list-group-item"
         {...this.props}
       />
