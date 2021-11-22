@@ -18,8 +18,14 @@ export default class Message extends Component {
           {message.map((item) => {
             return (
               <li key={item.id}>
-                {/* 传递params参数 */}
-                <Link to={`/home/message/detail/${item.id}/${item.title}`}>
+                {/* 一、传递params参数 */}
+                {/* <Link to={`/home/message/detail/${item.id}/${item.title}`}>
+                  {item.title}
+                </Link> */}
+                {/* 二、传递search参数 */}
+                <Link
+                  to={`/home/message/detail?id=${item.id}&title=${item.title}`}
+                >
                   {item.title}
                 </Link>
                 &nbsp;&nbsp;
@@ -28,8 +34,11 @@ export default class Message extends Component {
           })}
         </ul>
         <hr />
-        {/* 声明接收params参数 */}
-        <Route path="/home/message/detail/:id/:title" component={Detail} />
+        {/* 一、声明接收params参数 */}
+        {/* <Route path="/home/message/detail/:id/:title" component={Detail} /> */}
+
+        {/* 二、search参数无需声明接收，正常注册路由即可 */}
+        <Route path="/home/message/detail" component={Detail} />
       </div>
     );
   }
