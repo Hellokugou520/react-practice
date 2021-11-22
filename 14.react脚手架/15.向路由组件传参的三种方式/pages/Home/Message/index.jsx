@@ -23,8 +23,17 @@ export default class Message extends Component {
                   {item.title}
                 </Link> */}
                 {/* 二、传递search参数 */}
-                <Link
+                {/* <Link
                   to={`/home/message/detail?id=${item.id}&title=${item.title}`}
+                >
+                  {item.title}
+                </Link> */}
+                {/* 三、传递state参数 */}
+                <Link
+                  to={{
+                    pathname: "/home/message/detail",
+                    state: { id: item.id, title: item.title },
+                  }}
                 >
                   {item.title}
                 </Link>
@@ -38,6 +47,9 @@ export default class Message extends Component {
         {/* <Route path="/home/message/detail/:id/:title" component={Detail} /> */}
 
         {/* 二、search参数无需声明接收，正常注册路由即可 */}
+        {/* <Route path="/home/message/detail" component={Detail} /> */}
+
+        {/* 三、state参数无需声明接收，正常注册路由即可 */}
         <Route path="/home/message/detail" component={Detail} />
       </div>
     );

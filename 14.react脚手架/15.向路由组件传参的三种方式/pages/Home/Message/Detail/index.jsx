@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // qs上的parse和stringify方法处理urlencoded形式的参数
-import qs from "querystring";
+// import qs from "querystring";
 
 export default class Detail extends Component {
   state = {
@@ -16,11 +16,15 @@ export default class Detail extends Component {
     // const { id, title } = this.props.match.params;
 
     // 二、在props.location中拿到search参数
-    const { search } = this.props.location;
-    const { id, title } = qs.parse(search.slice(1));
-    const content = this.state.messageDetail.find((item) => {
-      return item.id === id;
-    });
+    // const { search } = this.props.location;
+    // const { id, title } = qs.parse(search.slice(1));
+
+    // 三、在props.location中拿到search参数
+    const { id, title } = this.props.location.state || {};
+    const content =
+      this.state.messageDetail.find((item) => {
+        return item.id === id;
+      }) || {};
     return (
       <ul>
         <li>ID:{id}</li>
