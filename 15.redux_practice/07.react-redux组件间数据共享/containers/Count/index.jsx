@@ -27,10 +27,11 @@ class Count extends Component {
     this.props.addAsync(value * 1, 500);
   };
   render() {
+    const { person, count } = this.props;
     return (
       <div>
-        <h1>Count组件</h1>
-        <h2>当前求和为：{this.props.count}</h2>
+        <h1>Count组件,Person组件有{person}个人</h1>
+        <h2>当前求和为：{count}</h2>
         <select
           ref={(e) => {
             this.numSelect = e;
@@ -51,8 +52,14 @@ class Count extends Component {
 }
 
 // 使用connect()()创建并暴露一个Count的容器组件
-export default connect((state) => ({ count: state }), {
-  add: addAction,
-  reduce: reduceAction,
-  addAsync: addAsyncAction,
-})(Count);
+export default connect(
+  (state) => ({
+    count: state.countReducer,
+    person: state.personReducer.length,
+  }),
+  {
+    add: addAction,
+    reduce: reduceAction,
+    addAsync: addAsyncAction,
+  }
+)(Count);
