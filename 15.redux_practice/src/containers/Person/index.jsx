@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { nanoid } from "nanoid";
 
 export default class Person extends Component {
   add = () => {
     const name = this.name.value;
     const age = this.age.value;
-    console.log(name, age);
+    const personObj = { id: nanoid(), name, age };
+    console.log(personObj);
   };
 
   render() {
