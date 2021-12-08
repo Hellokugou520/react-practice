@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import Demo from "./components/2_lazyLoad";
 
-export default class App extends Component {
+export default class Loading extends Component {
   render() {
     return (
       <div>
-        <Demo />
+        <h2 style={{ color: "#005174" }}>loading...</h2>
       </div>
     );
   }
