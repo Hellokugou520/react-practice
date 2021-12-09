@@ -1,7 +1,7 @@
 import React, { Component, lazy, Suspense } from "react";
 /**
  * 使用lazy方法实现路由的懒加载
- * Suspense用于某些情况下(例如网络波动导致组件长时间无法加载)，用fallback传入一个非懒加载的组件预先显示
+ * 在 Suspense 组件中渲染 lazy 组件，如此使得我们可以使用在等待加载 lazy 组件时做优雅降级（如 loading 指示器等）
  */
 import { NavLink, Route } from "react-router-dom";
 import Header from "./components/Header";
