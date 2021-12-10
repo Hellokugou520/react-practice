@@ -1,0 +1,17 @@
+.A {
+  background-color: rgb(226, 238, 115);
+  width: 400px;
+  padding: 10px;
+}
+
+.B {
+  background-color: rgb(105, 169, 224);
+  width: 100%;
+  padding: 10px;
+}
+
+.C {
+  background-color: rgb(252, 164, 186);
+  width: 100%;
+  padding: 10px;
+}
