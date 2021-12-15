@@ -1,0 +1,12 @@
+.parent {
+  background-color: rgb(255, 232, 167);
+  padding: 10px;
+}
+.a {
+  background-color: rgb(150, 255, 229);
+  padding: 10px;
+}
+.b {
+  background-color: rgb(231, 146, 196);
+  padding: 10px;
+}
