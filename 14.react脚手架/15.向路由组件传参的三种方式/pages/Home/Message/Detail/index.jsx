@@ -19,7 +19,7 @@ export default class Detail extends Component {
     // const { search } = this.props.location;
     // const { id, title } = qs.parse(search.slice(1));
 
-    // 三、在props.location中拿到search参数
+    // 三、在props.location中拿到state参数
     const { id, title } = this.props.location.state || {};
     const content =
       this.state.messageDetail.find((item) => {
