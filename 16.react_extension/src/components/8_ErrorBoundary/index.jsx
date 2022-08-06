@@ -9,7 +9,7 @@ export default class Parent extends Component {
   render() {
     const { error } = this.state;
     // 通过判断是否有错误信息来决定是否展示降级UI，而不是因为部分组件的报错导致整个页面的崩溃
-    // 代码需要运行在开发环境才能维持这个效果
+    // 代码需要运行在生产环境才能维持这个效果
     return <div>{error ? <h2>网络波动</h2> : <Children />}</div>;
   }
 }
